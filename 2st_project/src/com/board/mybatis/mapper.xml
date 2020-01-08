@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board">
+
+	
+	<!-- 전체 게시글 갯수 조회 -->
+	<select id="getBoardTotalCount" resultType="int">
+		SELECT COUNT(*) FROM BBS_T
+	</select>
+	
+	<!-- 페이지에 표시할 게시글 조회 
+		parameterType="Map" : begin, end 값 전달 용도
+		key-value 형태의 Map 사용 바인드변수명이 key가 됨-->
+	<select id="getBoardlist" resultType="com.board.vo.BoardVO"
+			parameterType="Map">
+
+		SELECT *
+		FROM (SELECT ROWNUM AS R_NUM, A.*
+  				FROM (SELECT *
+        			  FROM BBS_T
+        			  ORDER BY B_IDX DESC ) A
+<![CDATA[
+    			WHERE ROWNUM <=#{end} ) B
+		WHERE B.R_NUM >= #{begin}
+]]>
+	</select>
+	
+	<select id="getOneList" parameterType="String"
+			resultType="com.board.vo.BoardVO">
+		SELECT B_IDX, SUBJECT, WRITER, CONTENT, 
+		       FILE_NAME, ORI_NAME, PWD, WRITE_DATE, IP, HIT
+		FROM BBS_T
+		WHERE B_IDX = #{b_idx}
+	</select>
+	
+	<!-- 댓글 조회(게시글에 딸린) -->
+	<select id="getCommList" parameterType="String"
+			resultType="com.board.vo.CommVO">
+		SELECT *
+		FROM COMMENT_T
+		WHERE B_IDX = #{b_idx}
+		ORDER BY C_IDX DESC
+	</select>
+	
+	
+	<!-- 게시글 입력 
+	<insert id="insert" parameterType=com.board.vo.BoardVO>
+		INSERT INTO BBS_T
+		       (B_IDX, SUBJECT, WRITER, CONTENT, 
+		       FILE_NAME, ORI_NAME, PWD, WRITE_DATE, IP, HIT)
+		VALUES (BBS_T_SEQ.NEXTVAL, #{subject}, #{writer}, #{content}, 
+				#{file_name}, #{ori_name}, #{pwd}, SYSDATE, #{ip}, 0)
+	</insert>
+	-->
+	
+	<!-- 게시글 수정 -->
+	<update id="update" parameterType="com.board.vo.BoardVO">
+		UPDATE BBS_T
+		   SET SUBJECT = #{subject},
+		   	   WRITER = #{writer},
+		   	   CONTENT = #{content},
+		   	   FILE_NAME = #{file_name},
+		   	   ORI_NAME = #{ori_name},
+		   	   WRITE_DATE = SYSDATE
+		 WHERE B_IDX = #{b_idx}
+	</update>
+	
+	<!-- 게시글 삭제처리 -->
+	<delete id="delete" parameterType="String">
+		DELETE FROM BBS_T WHERE B_IDX = #{b_idx}
+	</delete>
+	
+	<!-- 조회수 1 증가 처리 -->
+	<update id="updateHit" parameterType="int">
+		UPDATE BBS_T SET HIT = HIT + 1 WHERE B_IDX = #{b_idx}
+	</update>
+	
+
+
+	
+	<!-- ========================== -->
+	<!-- 댓글 조회(게시글에 딸린) 
+	<select id="commList" parameterType="String"
+			resultType="com.bc.mybatis.CommVO">
+		SELECT *
+		FROM COMMENT_T
+		WHERE B_IDX = #{b_idx}
+		ORDER BY C_IDX DESC
+	</select>
+	-->
+	<!-- 댓글 입력 
+	<insert id="c_insert" parameterType="com.bc.mybatis.CommVO">
+		INSERT INTO COMMENT_T
+		       (C_IDX, WRITER, CONTENT, PWD,
+		       WRITE_DATE, IP, B_IDX)
+		VALUES (COMMENT_T_SEQ.NEXTVAL, #{writer}, #{content}, #{pwd},
+		       SYSDATE, #{ip}, #{b_idx})
+	</insert>
+	-->
+	<!-- 댓글 삭제 
+	<delete id="c_delete" parameterType="String">
+		DELETE FROM COMMENT_T WHERE C_IDX = #{c_idx}
+	</delete>
+ -->
+ 
+</mapper>
+
+
+
+
+
+
+
+
+

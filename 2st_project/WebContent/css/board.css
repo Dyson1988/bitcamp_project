@@ -1,0 +1,63 @@
+
+	#bbs table {
+		width: 580px;
+		margin-left: 10px;
+		border-collapse: collapse;
+		font-size: 14px;
+	}
+	#bbs table caption {
+		font-size: 20px;
+		font-weight: bold;
+		margin-bottom: 10px;
+	}
+	#bbs table th, td {
+		text-align: center;
+		border: 1px solid black;
+		padding: 4px 10px;
+	}
+	#bbs table th {
+		text-align: center;
+		border: 1px solid black;
+		padding: 4px 10px;
+		width: 30%;
+		background-color: lightsteelblue;
+	}
+	#bbs table td {
+		text-align: left;
+		border: 1px solid black;
+		padding: 4px 10px;
+	}
+	.title { background-color: lightsteelblue; }
+	.no { width: 15%; }
+	.writer { width: 15%; }
+	.regdate { width: 20%; }
+	.hit { width: 15%; }
+	
+	/***** 페이지 표시 부분 스타일(시작) ****/
+	.paging { list-style: none; }
+	.paging li {
+		float: left;
+		margin-right: 8px;
+	}
+	.paging li a {
+		text-decoration: none;
+		display: block;
+		padding: 3px 7px;
+		border: 1px solid #00B3DC;
+		font-weight: bold;
+		color: black;
+	}
+	.paging .disable {
+		border: 1px solid silver;
+		padding: 3px 7px;
+		color: silver;
+	}
+	.paging .now {
+		border: 1px solid #ff4aa5;
+		padding: 3px 7px;
+		background-color: #ff4aa5;
+	}
+	.paging li a:hover {
+		background-color: #00B3DC;
+		color: white;
+	}
