@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.board.action.Action;
 import com.board.action.BoardAllListAction;
 import com.board.action.BoardContentAction;
+import com.board.action.BoardContentAddAction;
 import com.board.action.BoardContentDeleteAction;
 import com.board.action.BoardContentModifyAction;
 import com.board.dao.BoardDAO;
@@ -27,11 +28,13 @@ public class BoardController extends HttpServlet {
 		String type = request.getParameter("type");
 		String path = "";
 		Action action = null;
+		System.out.println("type = " + type);
 		
 		switch(type) {
 		
 			case"boardAllList": action = new BoardAllListAction(); break;
 			case"boardContent": action = new BoardContentAction(); break;
+			case"boardContentAdd": action = new BoardContentAddAction(); break;
 			case"boardContentModify": action = new BoardContentModifyAction(); break;
 			case"boardContentDelete": action = new BoardContentDeleteAction(); break;
 		}

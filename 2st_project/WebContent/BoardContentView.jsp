@@ -4,6 +4,7 @@
 <%
 	//데이터를 게시글 수정에서 사용할 수 있도록 session scope에 등록한다.
 	session.setAttribute("bvo", request.getAttribute("bvo"));
+	pageContext.setAttribute("cPage", request.getParameter("cPage"));
 %>
 <!DOCTYPE html>
 <html>
@@ -17,19 +18,19 @@
 		document.frm.submit();
 	}	
 	function delete_go() {
-		document.frm.action = "delete.jsp";
+		document.frm.action = "BoardContentDeleteView.jsp";
 		document.frm.submit();
+		
 	}
 	function list_go() {
-		document.frm.action = "BoardController?type=boardAllList";
-		document.frm.submit();
+		location.href = "BoardController?cPage=${cPage}&type=boardAllList";
 	}
 </script>
 </head>
 <body>
 <div id="bbs">
 <%--게시글 내용 표시 --%>
-<form method="post" name="frm">
+<form method="get" name="frm">
 	<table>
 		<caption>상세보기</caption>
 		<tbody>
@@ -66,6 +67,7 @@
 					<input type="button" value="삭제" onclick="delete_go()">
 					<input type="button" value="목록" onclick="list_go()">
 					<input type="hidden" name="cPage" value="${cPage }">
+					<input type="hidden" name="b_idx" value="${bvo.b_idx }">
 				</td>
 			</tr>
 		</tfoot>

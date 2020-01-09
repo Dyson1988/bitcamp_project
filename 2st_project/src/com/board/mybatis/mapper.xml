@@ -45,15 +45,15 @@
 	</select>
 	
 	
-	<!-- 게시글 입력 
-	<insert id="insert" parameterType=com.board.vo.BoardVO>
+	<!-- 게시글 입력 -->
+	<insert id="insert" parameterType="com.board.vo.BoardVO">
 		INSERT INTO BBS_T
 		       (B_IDX, SUBJECT, WRITER, CONTENT, 
 		       FILE_NAME, ORI_NAME, PWD, WRITE_DATE, IP, HIT)
 		VALUES (BBS_T_SEQ.NEXTVAL, #{subject}, #{writer}, #{content}, 
 				#{file_name}, #{ori_name}, #{pwd}, SYSDATE, #{ip}, 0)
 	</insert>
-	-->
+	
 	
 	<!-- 게시글 수정 -->
 	<update id="update" parameterType="com.board.vo.BoardVO">

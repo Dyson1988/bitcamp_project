@@ -8,13 +8,13 @@
       <transactionManager type="JDBC"/>
       <dataSource type="POOLED">
         <property name="driver" value="oracle.jdbc.OracleDriver"/>
-        <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+        <property name="url" value="jdbc:oracle:thin:@192.168.0.17:1521:xe"/>
         <property name="username" value="mystudy"/>
         <property name="password" value="qwer1234"/>
       </dataSource>
     </environment>
   </environments>
-  
+  <!-- qwer1234 -->
   <!-- SQL 작성파일인 매퍼 파일 위치 지정 -->
   <mappers>
     <mapper resource="com/board/mybatis/mapper.xml"/>

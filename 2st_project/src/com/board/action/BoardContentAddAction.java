@@ -11,11 +11,11 @@ import com.board.vo.BoardVO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-public class BoardContentModifyAction implements Action{
+public class BoardContentAddAction implements Action {
 
 	@Override
-	public String execute(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
-		
+	public String execute(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String path = request.getSession().getServletContext().getRealPath("/mvc_view");
 		// String path = getServletContext().getRealPath("/upload");
@@ -24,24 +24,22 @@ public class BoardContentModifyAction implements Action{
 
 		BoardVO vo = new BoardVO();
 		vo.setWriter(mr.getParameter("writer"));
-		
 		vo.setSubject(mr.getParameter("subject"));
-		
 		vo.setContent(mr.getParameter("content"));
-		vo.setB_idx(mr.getParameter("b_idx"));
+		vo.setPwd(mr.getParameter("pwd"));
+		vo.setIp(request.getRemoteAddr());
 
 		// 파일 유무
-		if (mr.getFile("filename") != null) {
-			vo.setFile_name(mr.getFilesystemName("filename"));
+		if (mr.getFile("file_name") != null) {
+			vo.setFile_name(mr.getFilesystemName("file_name"));
 			vo.setOri_name(mr.getOriginalFileName("file_name"));
 		} else {
 			vo.setFile_name("");
 			vo.setOri_name("");
 		}
-		BoardDAO.getUpdate(vo);
 		
-		return "BoardController?b_idx=" + vo.getB_idx() 
-				+ "&cPage=" + mr.getParameter("cPage") +"&type=boardContent";
+		BoardDAO.getInsert(vo);
+		return "BoardController?cPage=0&type=boardAllList";
 	}
 
 }

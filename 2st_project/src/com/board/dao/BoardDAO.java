@@ -85,4 +85,20 @@ public class BoardDAO {
 			ss.close();
 			return result;
 		}
+
+		//게시글 수정
+		public static int getUpdate(BoardVO vo) {
+			SqlSession ss = DBService.getFactory().openSession(true);
+			int result = ss.update("update", vo);
+			ss.close();
+			return result;
+		}
+		
+		//게시글 추가
+		public static int getDelete(String b_idx) {
+			SqlSession ss = DBService.getFactory().openSession(true);
+			int result = ss.delete("delete", b_idx);
+			ss.close();
+			return result;
+		}
 }

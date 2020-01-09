@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <%
 	System.out.println("boardContentModify : "+ request.getParameter("bvo"));
+	pageContext.setAttribute("cPage",request.getParameter("cPage"));
 %>
 <!DOCTYPE html>
 <html>
@@ -27,6 +28,7 @@
 		//var pwd1 = document.firstForm.pwd.value;
 		var pwd1 = document.myForm.pwd.value; //새로 입력한 값
 		var pwd2 = "${bvo.pwd}"; //DB에 저장된 패스워드 값
+		
 		if (pwd1 != pwd2) {
 			alert("비밀번호가 일치하지 않습니다.");
 			document.myForm.pwd.value = "";
@@ -37,14 +39,14 @@
 		document.myForm.submit();
 	}
 	function list_go() {
-		location.href = "list.jsp?cPage=${cPage}";
+		location.href = "BoardController?cPage=${cPage}&type=boardAllList";
 	}
 </script>
 </head>
 <body>
 
 <div id="bbs">
-<form action="BoardController" method="post"
+<form action="BoardController?type=boardContentModify" method="post"
 		enctype="multipart/form-data" name="myForm">
 	<table>
 		<caption>게시글 수정</caption>
@@ -88,6 +90,7 @@
 					<input type="button" value="목록" onclick="list_go()">
 					
 					<input type="hidden" name="b_idx" value="${bvo.b_idx }">
+					<input type="hidden" name="cPage" value="${cPage }">
 				</td>
 			</tr>
 		</tbody>
