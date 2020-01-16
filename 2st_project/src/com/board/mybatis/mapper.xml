@@ -44,7 +44,7 @@
 		ORDER BY C_IDX DESC
 	</select>
 	
-	
+		
 	<!-- 게시글 입력 -->
 	<insert id="insert" parameterType="com.board.vo.BoardVO">
 		INSERT INTO BBS_T
@@ -52,6 +52,15 @@
 		       FILE_NAME, ORI_NAME, PWD, WRITE_DATE, IP, HIT)
 		VALUES (BBS_T_SEQ.NEXTVAL, #{subject}, #{writer}, #{content}, 
 				#{file_name}, #{ori_name}, #{pwd}, SYSDATE, #{ip}, 0)
+	</insert>
+	
+	<!-- 댓글 추가 -->
+	<insert id="insertReply" parameterType="com.board.vo.CommVO">
+		INSERT INTO COMMENT_T
+		       (C_IDX, STEP, LEV, BNAME, WRITER, CONTENT, PWD,
+		       WRITE_DATE, IP, B_IDX)
+		VALUES (COMMENT_T_SEQ.NEXTVAL, 0, 0, 'BBS', #{writer}, #{content}, #{pwd},
+		       SYSDATE, #{ip}, #{b_idx})
 	</insert>
 	
 	
@@ -78,7 +87,54 @@
 	</update>
 	
 
+	<!-- 유저에게 받은 검색어로 게시글 갯수 조회  -->
+	<select id="getConSearchCount" resultType="int"
+	      parameterType="Map">
+	   SELECT COUNT(*) 
+	   FROM BBS_T
+	   <choose>
+	   		<when test="idx == 1"> <!-- 제목+내용 -->
+				WHERE SUBJECT LIKE '%'||#{searchData}||'%'
+				   OR CONTENT LIKE '%'||#{searchData}||'%'
+	   		</when>
+	   		<when test="idx == 2"> <!-- 제목만 -->
+				WHERE SUBJECT LIKE '%'||#{searchData}||'%'
+	   		</when>
+	   		<when test="idx == 3"> <!-- 글작성자 -->
+				WHERE WRITER LIKE '%'||#{searchData}||'%'
+	   		</when>
+	   </choose>
+	</select>
+	
+	
+	<!-- 게시판 글 검색 조회  -->
+	<select id="getConSearch" resultType="com.board.vo.BoardVO"
+	      parameterType="Map">
+		SELECT *
+		FROM (SELECT ROWNUM AS R_NUM, A.*
+  				FROM (SELECT *
+        			  FROM BBS_T
+	   <choose>
+	   		<when test="idx == 1"> <!-- 제목+내용 -->
+				WHERE SUBJECT LIKE '%'||#{searchData}||'%'
+				   OR CONTENT LIKE '%'||#{searchData}||'%'
+	   		</when>
+	   		<when test="idx == 2"> <!-- 제목만 -->
+				WHERE SUBJECT LIKE '%'||#{searchData}||'%'
+	   		</when>
+	   		<when test="idx == 3"> <!-- 글작성자 -->
+				WHERE WRITER LIKE '%'||#{searchData}||'%'
+	   		</when>
+	   </choose>
+        			  ORDER BY B_IDX DESC ) A
+<![CDATA[
+    			WHERE ROWNUM <=#{end} ) B
+		WHERE B.R_NUM >= #{begin}
+]]>
+	</select>
 
+	<!-- WHERE WRITER = #{writer} AND SUBJECT LIKE '%'||#{subject}||'%'
+	 -->
 	
 	<!-- ========================== -->
 	<!-- 댓글 조회(게시글에 딸린) 
@@ -91,6 +147,7 @@
 	</select>
 	-->
 	<!-- 댓글 입력 
+	
 	<insert id="c_insert" parameterType="com.bc.mybatis.CommVO">
 		INSERT INTO COMMENT_T
 		       (C_IDX, WRITER, CONTENT, PWD,
@@ -104,6 +161,8 @@
 		DELETE FROM COMMENT_T WHERE C_IDX = #{c_idx}
 	</delete>
  -->
+ 
+ 
  
 </mapper>
 

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <%
 	//데이터를 게시글 수정에서 사용할 수 있도록 session scope에 등록한다.
 	session.setAttribute("bvo", request.getAttribute("bvo"));
@@ -23,7 +25,7 @@
 		
 	}
 	function list_go() {
-		location.href = "BoardController?cPage=${cPage}&type=boardAllList";
+		location.href = "BoardController?cPage=${cPage}&type=boardAllList&selValue=0";
 	}
 </script>
 </head>
@@ -75,8 +77,11 @@
 </form>
 <hr>
 
-<%--댓글 입력 폼 --%>
-<form method="post" action="ans_write_ok.jsp">
+<%--댓글 입력 폼                                        댓긁ㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱ                                          
+
+<form method="post" action="BoardController">
+--%>
+<form action="BoardController">
 	<p>이름 : <input type="text" name="writer"></p>
 	<p>내용 : <textarea name="content" rows="4" cols="55"></textarea></p>
 	<p>비밀번호 : <input type="password" name="pwd"></p>
@@ -84,6 +89,7 @@
 	
 	<input type="hidden" name="b_idx" value="${bvo.b_idx }">
 	<input type="hidden" name="cPage" value="${cPage }">
+	<input type="hidden" name="type" value="reply">
 </form>
 
 <%--댓글 출력(동적 태그 작성) --%>

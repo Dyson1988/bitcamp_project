@@ -5,7 +5,7 @@
 	암호가 일치하면 delete_ok.jsp로 삭제 처리 요청
 --%>
 
-<form action="BoardController?&type=boardContentDelete" method="post" name="frm">
+<form action="BoardController?&type=boardContentControl&contControl=1" method="post" name="frm" enctype="multipart/form-data">
 	비밀번호 : <input type="password" name="pwd">
 	<input type="button" value="삭제" onclick="del_go()">
 	<input type="button" value="돌아가기" onclick="list_go()">

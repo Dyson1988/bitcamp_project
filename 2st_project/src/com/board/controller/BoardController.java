@@ -13,15 +13,17 @@ import com.board.action.Action;
 import com.board.action.BoardAllListAction;
 import com.board.action.BoardContentAction;
 import com.board.action.BoardContentAddAction;
-import com.board.action.BoardContentDeleteAction;
-import com.board.action.BoardContentModifyAction;
+import com.board.action.BoardContentControlAction;
+import com.board.action.BoardContentSearchAction;
+import com.board.action.Multi_imgAction;
+import com.board.action.replyAction;
 import com.board.dao.BoardDAO;
 import com.board.vo.BoardVO;
 
 @WebServlet("/BoardController")
 public class BoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("controller doget 진입");
 		//index.jsp로 부터 전달 받은 type의 값을 받기 위해 파라미터 값 추출
@@ -31,15 +33,18 @@ public class BoardController extends HttpServlet {
 		System.out.println("type = " + type);
 		
 		switch(type) {
-		
-			case"boardAllList": action = new BoardAllListAction(); break;
-			case"boardContent": action = new BoardContentAction(); break;
-			case"boardContentAdd": action = new BoardContentAddAction(); break;
-			case"boardContentModify": action = new BoardContentModifyAction(); break;
-			case"boardContentDelete": action = new BoardContentDeleteAction(); break;
+			case"boardAllList": action = new BoardAllListAction();		break;
+			case"boardContent": action = new BoardContentAction();		break;
+			case"boardContentControl": action = new BoardContentControlAction();		break;
+			case"boardContentAdd": action = new BoardContentAddAction();		break;
+			case"boardContentSearch": action = new BoardContentSearchAction();	break;
+			case"reply": action = new replyAction();	break;
+			//case"contentAnsWrite"   : action = new ContentAnsWriteAction();		break;
+			case"rexy": action = new Multi_imgAction(); break;
 		}
 		
 		path = action.execute(request, response);
+		            
 		request.getRequestDispatcher(path).forward(request, response);
 	}
 

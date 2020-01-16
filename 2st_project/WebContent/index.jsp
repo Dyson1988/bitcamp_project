@@ -7,7 +7,7 @@
 <title>작업선택</title>
 <script>
 	function all_search(frm) {
-		frm.action = "BoardController?cPage=0&type=boardAllList";
+		frm.action = "BoardController?cPage=0&type=boardAllList&selValue=0";
 		frm.submit();
 	}
 </script>

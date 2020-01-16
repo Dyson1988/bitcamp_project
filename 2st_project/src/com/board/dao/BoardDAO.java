@@ -38,6 +38,25 @@ public class BoardDAO {
 			return vo;
 		}
 		
+		//검색 데이터를 받아 갯수 조회
+		public static int getConSearchCount(Map<String, String> map) {
+			SqlSession ss = DBService.getFactory().openSession(true);
+			System.out.println("DAO Map Data : " + map);
+			int result = ss.selectOne("getConSearchCount", map);
+			System.out.println("검색 데이터 개수 : " + result);
+			ss.close();
+			return result;
+		}
+		
+		//검색 데이터를 받아 조회
+		public static List<BoardVO> getConSearch(Map<String, String> map) {
+			SqlSession ss = DBService.getFactory().openSession(true);
+			List<BoardVO> list = ss.selectList("getConSearch", map);
+			System.out.println("검색 데이터 조회 값 : " + list);
+			ss.close();
+			return list;
+		}
+		
 		//게시글 클릭시 조회수 1증가 처리
 		public static int updateHit(int b_idx) {
 			SqlSession ss = DBService.getFactory().openSession(true);
@@ -58,6 +77,14 @@ public class BoardDAO {
 			List<CommVO> list = ss.selectList("getCommList", b_idx);
 			ss.close();
 			return list;
+		}
+		
+		//댓글 추가
+		public static int setInsert(CommVO cvo) {
+			SqlSession ss = DBService.getFactory().openSession(true);
+			int result = ss.insert("insertReply", cvo);
+			ss.close();
+			return result;
 		}
 		
 		

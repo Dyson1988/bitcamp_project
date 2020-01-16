@@ -5,29 +5,54 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-
+	session.setAttribute("conSearch", request.getParameter("conSearch"));
+	session.setAttribute("searchData", request.getParameter("searchData"));
+	
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>게시판</title>
+
+
+
 <link rel="stylesheet" href="css/BoardSearchView.css">
 <link rel="stylesheet" href="css/bootstrap.css">
 <script>
 	function listValue(e) {
 		var selValue = document.getElementById('listValue').value;
-		location.href="BoardController?cPage=0&type=boardAllList&conSearch=${conSearch}&searchData=${searchData}&selValue="+selValue;
-	} 
+		//document.listValue.action =
+		location.href="BoardController?cPage=0&type=boardContentSearch&conSearch=${conSearch}&searchData=${searchData}&selValue="+selValue;
+		
+		//${paging.setNumPerPage(selectValue)}
+		//location.href="BoardController?&type=boardContentSearch&conSearch="+${conSearch}+"&searchData="+${searchData};
+		//location.href="zdddd.jsp";
+		
+		//e.action("BoardController?&type=boardContentSearch&conSearch="+${conSearch}+"&searchData="+${searchData});
+		//console.log(e.value);
+		//var value = document.createElement("form");
+		
+		//value.action="BoardController?cPage=0&type=boardContentSearch&conSearch=${conSearch}&searchData=${searchData}";
+		//value.action="BoardController?type=boardContentSearch";
+		//document.body.appendChild(value);
+		//value.submit();
+		//console.log(value);
+		
+		//e.submit();
+		
+		
+	}
 </script>
 </head>
 <body>
 <div id="bbs">
 <table>
-	<caption>게시글 목록</caption>
+	<caption>검색 게시글 목록</caption>
+		<h2>게시글 목록</h2>
 	<thead>
 		<tr>
-			<td valgn=top colspan="5">
+			<td colspan="5">
 				<select id="listValue" name="listValue" onchange="listValue()">
 					<option value="5">5개씩</option>
 					<option value="10">10개씩</option>
@@ -39,6 +64,7 @@
 				</select>
 			</td>
 		</tr>
+		
 		<tr class="title">
 			<th class="no">번호</th>
 			<th class="subject">제목</th>
@@ -53,19 +79,22 @@
 		<c:when test="${empty list }">
 			<tr>
 				<td colspan="5">
-					<h2>현재 등록된 게시글이 없습니다.</h2>
+					<h3>입력하신 검색어는  등록된 게시글이 없습니다.</h3>
+					
 				</td>
 			</tr>
+			
+			
 		</c:when>
 		<c:otherwise>
 			<c:forEach var="vo" items="${list }">
 				<tr>
 					<td>${vo.b_idx }</td>
 					<td>
-						<a href="BoardController?b_idx=${vo.b_idx}&cPage=${paging.nowPage}&type=boardContent&selValue=${selValue }">
+						<a href="BoardController?b_idx=${vo.b_idx}&cPage=${paging.nowPage}&type=boardContent">
 							${vo.subject }
 						</a>
-					</td> 
+					</td>
 					<td>${vo.writer }</td>
 					<td>${vo.write_date.substring(0, 10) }</td>
 					<td>${vo.hit }</td>
@@ -87,7 +116,7 @@
 					</c:when>
 					<c:otherwise>
 						<li>
-							<a href="BoardController?cPage=${paging.beginPage - 1}&type=boardAllList&selValue=${selValue }">이전으로</a>
+							<a href="BoardController?cPage=${paging.beginPage - 1}&type=boardContentSearch&conSearch=${conSearch}&searchData=${searchData}&selValue=${selValue }">이전으로</a>
 						</li>
 					</c:otherwise>
 				</c:choose>
@@ -100,7 +129,7 @@
 					</c:when>
 					<c:otherwise>
 						<li>
-							<a href="BoardController?cPage=${k}&type=boardAllList&selValue=${selValue }">${k}</a>
+							<a href="BoardController?cPage=${k}&type=boardContentSearch&conSearch=${conSearch}&searchData=${searchData}&selValue=${selValue }">${k}</a>
 						</li> 
 					</c:otherwise>
 				</c:choose>
@@ -114,9 +143,10 @@
 						<li class="disable">다음으로</li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="BoardController?cPage=${paging.endPage + 1}&type=boardAllList&selValue=${selValue }">다음으로</a></li>
+						<li><a href="BoardController?cPage=${paging.endPage + 1}&type=boardContentSearch&conSearch=${conSearch}&searchData=${searchData}&selValue=${selValue }">다음으로</a></li>
 					</c:otherwise>
 				</c:choose>
+				
 				</ol>	
 			</td>
 			
@@ -129,13 +159,13 @@
 						<option value="subject">제목만</option>
 						<option value="writer">글작성자</option>
 					</select>
-					<input type="text" placeholder="검색어를 입력해주세요" name="searchData">
+					<input type="text" class="search-text" placeholder="검색어를 입력해주세요" name="searchData" value="${searchData }">
 					<input type="hidden" name="type" value="boardContentSearch">
 					<input type="hidden" name="cPage" value="0">
 					<input type="hidden" name="selValue" value="${selValue }">
-					<input type="submit" value="검색">
+					<input type="submit" class="search-btn" value="검색">
 					
-					<input type="button" value="글쓰기"
+					<input type="button" class="writing" value="글쓰기"
 					onclick="javascript:location.href='BoardWriteView.jsp'">
 				</td>
 			</tr>

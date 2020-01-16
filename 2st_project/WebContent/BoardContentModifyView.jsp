@@ -46,7 +46,7 @@
 <body>
 
 <div id="bbs">
-<form action="BoardController?type=boardContentModify" method="post"
+<form action="BoardController?type=boardContentControl&contControl=0" method="post"
 		enctype="multipart/form-data" name="myForm">
 	<table>
 		<caption>게시글 수정</caption>
