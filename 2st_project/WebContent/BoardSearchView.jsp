@@ -15,8 +15,6 @@
 <meta charset="UTF-8">
 <title>게시판</title>
 
-
-
 <link rel="stylesheet" href="css/BoardSearchView.css">
 <link rel="stylesheet" href="css/bootstrap.css">
 <script>
@@ -46,6 +44,7 @@
 </script>
 </head>
 <body>
+<%@ include file="include/includetop.jspf" %>
 <div id="bbs">
 <table>
 	<caption>검색 게시글 목록</caption>
@@ -173,5 +172,6 @@
 	</tfoot>
 </table>
 </div>
+	<%@ include file="include/includescript.jspf" %>
 </body>
 </html>

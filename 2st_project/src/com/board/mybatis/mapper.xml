@@ -41,9 +41,16 @@
 		SELECT *
 		FROM COMMENT_T
 		WHERE B_IDX = #{b_idx}
-		ORDER BY C_IDX DESC
+		ORDER BY C_IDX 
 	</select>
 	
+	<!-- 댓글 조회(step 조회) -->
+	<select id="getCommStep" parameterType="String"
+			resultType="int">
+		SELECT COUNT(STEP)
+		FROM COMMENT_T
+		WHERE B_IDX = #{b_idx}
+	</select>
 		
 	<!-- 게시글 입력 -->
 	<insert id="insert" parameterType="com.board.vo.BoardVO">
@@ -55,11 +62,20 @@
 	</insert>
 	
 	<!-- 댓글 추가 -->
-	<insert id="insertReply" parameterType="com.board.vo.CommVO">
+	<insert id="setReInsert" parameterType="com.board.vo.CommVO">
 		INSERT INTO COMMENT_T
 		       (C_IDX, STEP, LEV, BNAME, WRITER, CONTENT, PWD,
 		       WRITE_DATE, IP, B_IDX)
-		VALUES (COMMENT_T_SEQ.NEXTVAL, 0, 0, 'BBS', #{writer}, #{content}, #{pwd},
+		VALUES (COMMENT_T_SEQ.NEXTVAL, #{step}, #{lev}, 'BBS', #{writer}, #{content}, #{pwd},
+		       SYSDATE, #{ip}, #{b_idx})
+	</insert>
+	
+	<!-- 댓긋에 답글 추가 -->
+	<insert id="setReAnsWrite" parameterType="com.board.vo.CommVO">
+		INSERT INTO COMMENT_T
+		       (C_IDX, STEP, LEV, BNAME, WRITER, CONTENT, PWD,
+		       WRITE_DATE, IP, B_IDX)
+		VALUES (COMMENT_T_SEQ.NEXTVAL, #{step}, #{lev}, 'BBS', #{writer}, #{content}, #{pwd},
 		       SYSDATE, #{ip}, #{b_idx})
 	</insert>
 	
@@ -74,6 +90,22 @@
 		   	   ORI_NAME = #{ori_name},
 		   	   WRITE_DATE = SYSDATE
 		 WHERE B_IDX = #{b_idx}
+	</update>
+	
+	<delete id="re_delete" parameterType="com.board.vo.CommVO">
+		DELETE FROM COMMENT_T 
+		WHERE B_IDX = #{b_idx} 
+		  AND STEP = #{step}
+		  AND LEV = #{lev} 
+	</delete>
+	
+	<!-- 댓글 삽입전 lev 업데이터 처리 원글과 같은 그룹이면서(lev) 레벨이 같거나 큰 레벨은 lev 1증가 -->
+	<update id="updateLev" parameterType="Map">
+		UPDATE COMMENT_T
+		SET	LEV = LEV + 1
+		WHERE B_IDX = #{b_idx} 
+		AND STEP = #{step}
+		AND LEV >= #{lev}
 	</update>
 	
 	<!-- 게시글 삭제처리 -->
@@ -133,35 +165,30 @@
 ]]>
 	</select>
 
-	<!-- WHERE WRITER = #{writer} AND SUBJECT LIKE '%'||#{subject}||'%'
-	 -->
-	
-	<!-- ========================== -->
-	<!-- 댓글 조회(게시글에 딸린) 
-	<select id="commList" parameterType="String"
-			resultType="com.bc.mybatis.CommVO">
-		SELECT *
-		FROM COMMENT_T
-		WHERE B_IDX = #{b_idx}
-		ORDER BY C_IDX DESC
+
+ 	<select id="userID" resultType="com.board.vo.BoardVO"
+			parameterType="Map"> 
+			SELECT userPassword FROM USER WHERE userID = #{userID}	
 	</select>
-	-->
-	<!-- 댓글 입력 
+
+	<!-- 로그인 확인 -->	
+	<select id="loginCheck" parameterType="hashMap" resultType="hashMap">
+		SELECT PWD FROM MEMBER2
+		WHERE ID = #{id}
+	</select>
 	
-	<insert id="c_insert" parameterType="com.bc.mybatis.CommVO">
-		INSERT INTO COMMENT_T
-		       (C_IDX, WRITER, CONTENT, PWD,
-		       WRITE_DATE, IP, B_IDX)
-		VALUES (COMMENT_T_SEQ.NEXTVAL, #{writer}, #{content}, #{pwd},
-		       SYSDATE, #{ip}, #{b_idx})
+	<!-- 회원가입 -->
+	<insert id="join" parameterType="map">
+		INSERT INTO MEMBER2
+		       (IDX, ID, PWD, NAME, AGE, ADDRESS, REG)
+		VALUES (MEMBER2_SEQ.NEXTVAL, #{ID}, #{PWD}, #{name}, 
+				#{age}, #{address}, SYSDATE)
 	</insert>
-	-->
-	<!-- 댓글 삭제 
-	<delete id="c_delete" parameterType="String">
-		DELETE FROM COMMENT_T WHERE C_IDX = #{c_idx}
-	</delete>
- -->
- 
+	
+	<!-- DB에 ID가 등록 되어 있는지 확인한다. -->
+	<select id="getDuplicateID" resultType="int" parameterType="String">
+		SELECT COUNT(*) FROM MEMBER2 WHERE ID = #{id}
+	</select>
  
  
 </mapper>

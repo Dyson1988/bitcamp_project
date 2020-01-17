@@ -3,10 +3,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
 
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,9 +19,11 @@
 </script>
 </head>
 <body>
+<%@ include file="include/includetop.jspf" %>
 <div id="bbs">
 <table>
 	<caption>게시글 목록</caption>
+	
 	<thead>
 		<tr>
 			<td valgn=top colspan="5">
@@ -143,5 +142,6 @@
 	</tfoot>
 </table>
 </div>
+	<%@ include file="include/includescript.jspf" %>
 </body>
 </html>

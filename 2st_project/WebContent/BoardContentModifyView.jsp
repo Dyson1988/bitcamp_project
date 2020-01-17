@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <%
 	System.out.println("boardContentModify : "+ request.getParameter("bvo"));
 	pageContext.setAttribute("cPage",request.getParameter("cPage"));
@@ -9,6 +8,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="css/bootstrap.css">
+
 <title>게시글 수정</title>
 <script>
 	function sendData() {
@@ -44,6 +45,7 @@
 </script>
 </head>
 <body>
+<%@ include file="include/includetop.jspf" %>
 
 <div id="bbs">
 <form action="BoardController?type=boardContentControl&contControl=0" method="post"
@@ -90,7 +92,7 @@
 					<input type="button" value="목록" onclick="list_go()">
 					
 					<input type="hidden" name="b_idx" value="${bvo.b_idx }">
-					<input type="hidden" name="cPage" value="${cPage }">
+					<input type="hidden" name="cPage" value="${cPage }">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
 				</td>
 			</tr>
 		</tbody>

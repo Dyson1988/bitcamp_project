@@ -40,6 +40,6 @@
 			onclick="del_go()">
 	<input type="hidden" name="b_idx" value="${bvo.b_idx }">						
 </form>
-
+	<%@ include file="include/includescript.jspf" %>
 </body>
 </html>

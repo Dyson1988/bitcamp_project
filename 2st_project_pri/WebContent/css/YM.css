@@ -1,0 +1,33 @@
+@charset "UTF-8";
+	
+	.bold {font-weight: bold;}
+	.italic {font-style: italic;}
+	.underline {text-decoration: underline;}
+	.alignleft {text-align: left;}
+	.aligncenter {text-align: center;}
+	.alignright {text-align: right;}
+
+
+	#container {
+		width: 512px;
+		margin: auto;
+	}
+	
+	#container h2 {text-align: center;}
+	#container p {text-align: center;}
+	#contatiner table {
+		width: 500px;
+		padding: 0 5px;
+		border: 1px solid black;
+		border-collapse: collapse;
+	}
+	
+	#container table th, td {border: 1px solid black;}
+	#container table th {
+		background-color: #111;
+		text-align: center;
+	}
+	
+	
+	
+	

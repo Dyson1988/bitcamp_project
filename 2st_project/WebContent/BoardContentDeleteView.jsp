@@ -4,6 +4,17 @@
 	게시글 삭제 작업을 하기 위해 암호를 입력 받고
 	암호가 일치하면 delete_ok.jsp로 삭제 처리 요청
 --%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<link rel="stylesheet" href="css/bootstrap.css">
+
+<title>게시글 삭제</title>
+</head>
+<body>
+<%@ include file="include/includetop.jspf" %>
 
 <form action="BoardController?&type=boardContentControl&contControl=1" method="post" name="frm" enctype="multipart/form-data">
 	비밀번호 : <input type="password" name="pwd">
@@ -36,3 +47,6 @@
 		location.href = "BoardController?cPage=<%=request.getParameter("cPage") %>&type=boardAllList";
 	}
 </script>
+	<%@ include file="include/includescript.jspf" %>
+</body>
+</html>

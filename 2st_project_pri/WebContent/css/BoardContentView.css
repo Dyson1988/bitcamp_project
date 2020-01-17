@@ -1,0 +1,109 @@
+@charset "UTF-8";
+
+
+table{
+	width: 900px;
+	border-collapse: collapse;
+	margin:0 auto;
+	height:300px;
+	margin-top: 50px;
+	border:1px solid black;
+	
+}
+
+h1{
+	height:20px;
+	margin:0 auto;
+	text-align: center;
+}
+
+th{
+	border-bottom:1px solid #eee;
+	background-color:gray;
+	color:#fff;
+	margin:0 auto;
+	padding:5px;
+	text-align: center;
+	font-size:1em;
+	box-sizing: 20px;
+	width:90px;
+}
+
+tr, td{
+	
+	border:1px solid black;
+	margin:0 auto;
+	text-align: center;
+}
+
+.writer {
+	
+	
+}
+
+#writer{
+	
+}
+
+
+.ans_write{
+	width: 900px;
+	height: 150px;
+	border:1px solid #eee;
+	margin:0 auto;
+	margin-top:50px;
+	
+	background-color: #eee;
+	border-radius: 6px;
+	
+}
+
+
+
+
+textarea {
+  width: 900px;
+  height: 80px;
+  padding: 13px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+  margin:0 auto;
+  margin-top:22px;
+  
+  
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

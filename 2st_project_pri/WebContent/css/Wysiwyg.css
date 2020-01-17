@@ -1,0 +1,174 @@
+html,
+body {
+  font-family: "NanumSquare", sans-serif;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.clearfix:after,
+.clearfix:before {
+  display: table;
+  content: "";
+  clear: both;
+}
+.style {
+  padding-top: 50px;
+  font-size: 14px;
+}
+.style h1 {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+  
+}
+.name{
+	margin:10px;
+	width:30%;
+	padding:0;
+	
+	
+}
+.title{
+	margin:10px;
+	width:100%;
+	padding:0;
+	font-size:1em;
+	
+}
+.custom-select{
+	
+}
+
+
+
+.style h1 span {
+  
+  -webkit-text-stroke: 1px #000;
+   
+   
+}
+.style ul,
+.style ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+.style .style-wrap {
+  border-top: 1px solid #eee;
+  padding-top: 50px;
+}
+.style .style-wrap > li {
+  padding: 10px 5px 10px 0;
+}
+.style .style-wrap > li .btn {
+  border-color: #eee !important;
+}
+.style .style-wrap > li ol {
+  border: 1px solid #eee;
+  border-radius: 5px;
+}
+.style .style-wrap > li ol li {
+  min-width: 38px;
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: #222;
+  cursor: pointer;
+}
+
+.style .style-wrap > li ol li:hover {
+  background-color: grey;
+}
+.style .text-style {
+  border: 1px solid #eee;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.style .text-style li {
+  min-width: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.style .text-style li:hover {
+  background-color: #f9f9f9;
+}
+.style .text-style li span {
+  display: block;
+  text-align: center;
+  font-size: 16px;
+  width: 38px;
+  height: 38px;
+  line-height: 38px;
+}
+.style .text-style li.bold {
+  font-weight: bold;
+}
+.style .text-style li.underline {
+  text-decoration: underline;
+}
+.style .text-style li.italic {
+  font-style: italic;
+}
+.style .text-style li.lineThrough {
+  text-decoration: line-through;
+}
+.style .text-style li.color {
+  color: #f00;
+}
+.style .text-style li.bgcolor span {
+  width: 24px;
+  height: 24px;
+  background-color: #4dabf7;
+  border-radius: 5px;
+  padding: 0 3px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 600;
+}
+.message-wrapper {
+  width: 100%;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding: 30px 20px;
+  max-height: 50em;
+  background-color:#fafbfc;
+}
+.message-wrapper .message-text {
+  min-height: 12em;
+  width: 100%;
+  text-align: left;
+  align-content: center;
+  outline: none;
+  overflow: hidden;
+  line-height: 1.8em;
+  font-size: 14px;
+ 
+}
+.message-wrapper .message-text[contenteditable="true"]:empty:before {
+  content: attr(placeholder);
+  display: block;
+}
+
+.footer{
+  display: flex;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  margin:10px;
+  margin-right:-60%;
+
+ 
+ 
+}
+  
+
+
+

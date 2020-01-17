@@ -15,8 +15,13 @@ import com.board.action.BoardContentAction;
 import com.board.action.BoardContentAddAction;
 import com.board.action.BoardContentControlAction;
 import com.board.action.BoardContentSearchAction;
+import com.board.action.CheckIDAction;
 import com.board.action.Multi_imgAction;
-import com.board.action.replyAction;
+import com.board.action.boardAnsDeleteAction;
+import com.board.action.boardAnsReplyAction;
+import com.board.action.boardAnsWriteAction;
+import com.board.action.joinAction;
+import com.board.action.loginAction;
 import com.board.dao.BoardDAO;
 import com.board.vo.BoardVO;
 
@@ -38,9 +43,13 @@ public class BoardController extends HttpServlet {
 			case"boardContentControl": action = new BoardContentControlAction();		break;
 			case"boardContentAdd": action = new BoardContentAddAction();		break;
 			case"boardContentSearch": action = new BoardContentSearchAction();	break;
-			case"reply": action = new replyAction();	break;
-			//case"contentAnsWrite"   : action = new ContentAnsWriteAction();		break;
+			case"boardAnsWrite": action = new boardAnsWriteAction();	break;
+			case"boardAnsDelete": action = new boardAnsDeleteAction();	break;
+			case"boardAnsReply": action = new boardAnsReplyAction();	break;
 			case"rexy": action = new Multi_imgAction(); break;
+			case"login": action = new loginAction(); break;
+			case"join": action = new joinAction(); break;
+			case"Duplicate_go": action = new CheckIDAction(); break;
 		}
 		
 		path = action.execute(request, response);
